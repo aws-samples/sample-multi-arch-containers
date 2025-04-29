@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Migrating applications to AWS Graviton on Amazon EKS</title>
+    <style>
+        :root {
+            /* AWS Dark Theme Color Palette */
+            --aws-dark-bg: #232f3e;
+            --aws-darker-bg: #1a232e;
+            --aws-orange: #ff9900;
+            --aws-light-blue: #00a1c9;
+            --aws-green: #2baa5b;
+            --aws-red: #d13212;
+            --aws-text: #ffffff;
+            --aws-text-secondary: #d5dbdb;
+            --aws-border: #3f4c5c;
+            --aws-card-bg: #2d3c4f;
+        }
+        
+        body {
+            font-family: 'Amazon Ember', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: var(--aws-dark-bg);
+            color: var(--aws-text);
+        }
+        
+        .container {
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            background-color: var(--aws-card-bg);
+            border: 1px solid var(--aws-border);
+        }
+        
+        .success {
+            border-left: 5px solid var(--aws-green);
+        }
+        
+        .error {
+            border-left: 5px solid var(--aws-red);
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--aws-orange);
+        }
+        
+        pre {
+            background-color: var(--aws-darker-bg);
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            max-height: 300px;
+            overflow-y: auto;
+            color: var(--aws-text-secondary);
+            border: 1px solid var(--aws-border);
+        }
+        
+        .arch-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .amd64 {
+            background-color: var(--aws-light-blue);
+            color: white;
+        }
+        
+        .arm64 {
+            background-color: var(--aws-green);
+            color: white;
+        }
+        
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .image-box {
+            width: 31%;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: var(--aws-darker-bg);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--aws-border);
+        }
+        
+        .image-box img {
+            max-width: 100%;
+            border: 1px solid var(--aws-border);
+            border-radius: 4px;
+        }
+        
+        .image-box h3 {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            color: var(--aws-orange);
+        }
+        
+        ul {
+            color: var(--aws-text-secondary);
+        }
+        
+        ul li {
+            margin-bottom: 5px;
+        }
+        
+        ul li strong {
+            color: var(--aws-text);
+        }
+        
+        a {
+            color: var(--aws-light-blue);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Migrating applications to AWS Graviton on Amazon EKS</h1>
+    
+    <div class="arch-info container">
+        <h2>System Information</h2>
+        <p>
+            <span class="arch-badge {{ arch }}">{{ arch }}</span>
+            Running on {{ platform }}
+        </p>
+    </div>
+    
+    <div class="container {{ status }}">
+        <h2>OpenCV Test</h2>
+        <p><strong>{{ message }}</strong></p>
+        
+        {% if status == 'success' %}
+            <h3>Details:</h3>
+            <ul>
+                <li><strong>OpenCV Version:</strong> {{ details.version }}</li>
+                <li><strong>Platform:</strong> {{ details.platform }}</li>
+                <li><strong>Python Version:</strong> {{ details.python_version }}</li>
+                <li><strong>Architecture:</strong> {{ details.arch }}</li>
+            </ul>
+            
+            <div class="image-container">
+                <div class="image-box">
+                    <h3>Original Image</h3>
+                    <img src="data:image/png;base64,{{ images.original }}" alt="Original Image">
+                </div>
+                <div class="image-box">
+                    <h3>Grayscale Image</h3>
+                    <img src="data:image/png;base64,{{ images.grayscale }}" alt="Grayscale Image">
+                </div>
+                <div class="image-box">
+                    <h3>Blurred Image</h3>
+                    <img src="data:image/png;base64,{{ images.blurred }}" alt="Blurred Image">
+                </div>
+            </div>
+            
+            <h4>OpenCV Build Information:</h4>
+            <pre>{{ details.build_info_excerpt }}</pre>
+        {% else %}
+            <h3>Error Details:</h3>
+            <pre>{{ details }}</pre>
+        {% endif %}
+    </div>
+</body>
+</html>
