@@ -1,4 +1,4 @@
-# Migrating applications to AWS Graviton on Amazon EKS
+# Build and run multi-architecture containers on AWS Graviton
 
 This project demonstrates how to build and run multi-architecture Docker images using OpenCV as an example of a native library that requires architecture-specific binaries.
 
