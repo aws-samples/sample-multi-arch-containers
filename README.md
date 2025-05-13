@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Build and run multi-architecture containers on AWS Graviton
 
 This project demonstrates how to build and run multi-architecture Docker images using OpenCV as an example of a native library that requires architecture-specific binaries.
@@ -130,5 +129,3 @@ See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more inform
 ## License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
-
->>>>>>> upstream/main
