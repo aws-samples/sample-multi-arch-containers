@@ -20,6 +20,9 @@ ARCH_MAP = {
 }
 STD_ARCH = ARCH_MAP.get(ARCH, ARCH)
 
+# Default port
+DEFAULT_PORT = 5000
+
 def process_image_with_opencv():
     """
     Try to import and use OpenCV to process an image,
@@ -108,4 +111,13 @@ def serve_static(filename):
     return send_from_directory(app.static_folder, filename)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = DEFAULT_PORT
+
+    if len(sys.argv) > 1:
+        try:
+            port = int(sys.argv[1])
+        except ValueError:
+            print(f"Invalid port number: {sys.argv[1]}")
+
+    app.run(host='0.0.0.0', port=port, debug=True)
+    
