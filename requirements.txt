@@ -1,4 +1,4 @@
 flask==2.0.1
 werkzeug==2.0.3
 opencv-python==3.4.11.45
-numpy==1.21.2
+numpy==1.22.0
